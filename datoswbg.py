@@ -1,17 +1,11 @@
-import wbdata
+import wbgapi as wb
 import pandas as pd
-from datetime import datetime
+import openpyxl as op
 
-# Definir el rango de fechas
-start_date = datetime(2005, 1, 1)
-end_date = datetime(2023, 12, 31)
+# Obtener el dataframe
+inflation = wb.data.DataFrame('FP.CPI.TOTL.ZG', 'USA')
 
-# Obtener los datos de inflación mensual para Estados Unidos
-data = wbdata.get_dataframe(indicators={'FP.CPI.TOTL': 'CPI'},
-                            country='USA',
-                            data_date=(start_date, end_date),
-                            convert_date=True,
-                            freq='M')  # freq='M' para datos mensuales
+print (inflation)
 
-# Mostrar los datos
-print(data)
+# Guardar el dataframe en un archivo Excel
+inflation.to_excel(r'C:\Users\adria\Downloads\Data modelo tesis\Anual\Tasa de inflación\inflacionn2.xlsx', index=False)
